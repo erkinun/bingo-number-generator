@@ -7,27 +7,43 @@ function generateSeries(start: number, end: number, step = 1) {
 }
 
 function App() {
-  const numbers = generateSeries(0, 75);
+  const numbers = generateSeries(1, 75);
   const [pickedNumbers, setPickedNumbers] = useState<number[]>([]);
+  const lastNumber = pickedNumbers[pickedNumbers.length - 1];
+
+  console.log({ lastNumber });
 
   function pickANumber() {
     const all = new Set(numbers);
     const picked = new Set(pickedNumbers);
-    const remaining: Set<number> = all.difference(picked);
+    const remaining = numbers.filter((n) => !picked.has(n));
 
-    const remArr = Array.from(remaining);
-
-    const randomIndex = Math.floor(Math.random() * remArr.length);
-    console.log({ all, picked, remaining, remArr, randomIndex });
-    const number = remArr[randomIndex];
+    const randomIndex = Math.floor(Math.random() * remaining.length);
+    console.log({ all, picked, remaining, randomIndex });
+    const number = remaining[randomIndex];
 
     setPickedNumbers((prev) => [...prev, number]);
   }
 
   return (
     <>
-      <div>{JSON.stringify(pickedNumbers)}</div>
+      <div>Erkin's greatest bingo generator</div>
       <button onClick={pickANumber}>Pick a number</button>
+
+      <div className="board">
+        {numbers.map((n) => {
+          const classNames = `tile ${
+            pickedNumbers.some((p) => p === n) ? "picked" : ""
+          } ${lastNumber === n ? "last" : ""}`;
+          return (
+            <div className={classNames} key={n}>
+              {n}
+            </div>
+          );
+        })}
+      </div>
+
+      <div>{JSON.stringify(pickedNumbers)}</div>
     </>
   );
 }

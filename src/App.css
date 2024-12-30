@@ -40,3 +40,25 @@
 .read-the-docs {
   color: #888;
 }
+
+.tile {
+  border: 1px solid white;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.picked {
+  background-color: orange;
+}
+
+.last {
+  background-color: aquamarine;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.25rem;
+}
