@@ -11,7 +11,8 @@ function App() {
   const [pickedNumbers, setPickedNumbers] = useState<number[]>([]);
   const lastNumber = pickedNumbers[pickedNumbers.length - 1];
 
-  console.log({ lastNumber });
+  // TODO add different range options like 90 etc
+  // TODO add game state to localstorage etc
 
   function pickANumber() {
     const all = new Set(numbers);
